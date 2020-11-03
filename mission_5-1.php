@@ -8,22 +8,22 @@ $pdo = new PDO($dsn, $user, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_W
 
 //データベース内にテーブルを作成する
 $sql = "CREATE TABLE IF NOT EXISTS tb_5_1"
-	." ("
-	. "id INT AUTO_INCREMENT PRIMARY KEY,"
-	. "name char(32),"
+    ." ("
+    . "id INT AUTO_INCREMENT PRIMARY KEY,"
+    . "name char(32),"
     . "comment TEXT,"
     . "date DATETIME,"
     . "PassWord TEXT"
-	.");";
+    .");";
     $stmt = $pdo->query($sql);
 
 $flag=0;//念のためflagの初期化
 
+//【編集機能1】
 //編集ボタンが押された時のみ動作
 if(!empty($_POST["submit_write"])){
     //投稿番号、パスワードどちらもあれば
     if(!empty($_POST["write"]) && !empty($_POST["PW_write"])){
-    //echo "【編集機能1】";
     $write=$_POST["write"];
     $PW_write=$_POST["PW_write"];
 
@@ -68,17 +68,18 @@ if(!empty($_POST["submit_write"])){
         <form action="" method="post">
            【 投稿フォーム 】<br>
             <label for="name">名前：</label>
-            <input type="text" name="name" value="<?php if(!empty($re_name)){ echo $re_name;}?>" placeholder="名前"><br>
+            <input type="text" name="name" value="<?php if(!empty($re_name)){echo $re_name;}?>" placeholder="名前"><br>
             
             <label for="comment">コメント：</label>
-            <input type="text" name="comment" value="<?php if(!empty($re_comment)){ echo $re_comment;}?>" placeholder="コメント"><br>
+            <input type="text" name="comment" value="<?php if(!empty($re_comment)){echo $re_comment;}?>" placeholder="コメント"><br>
             
             <label for="PW">パスワード：</label>
             <input type="text" name="PW" value="" placeholder="パスワード">  
             <input type="submit" name="submit"><br>
 
             <!--編集したい投稿番号をhiddenで表示-->
-            <input type="hidden" name="PostNumber" value="<?php if(!empty($re_write)){ echo $re_write;}?>"><br>  <!-- type="hidden" 確認する時はnumberにすれば良い-->
+            <input type="hidden" name="PostNumber" value="<?php if(!empty($re_write)){echo $re_write;}?>"><br>  
+	    <!-- type="hidden" 確認したい時はnumberにすれば良い-->
             
             【 削除フォーム 】<br>
             <label for="delete">投稿番号：</label>    
